@@ -1,0 +1,35 @@
+{
+  "name": "barproject_backend",
+  "version": "0.0.1",
+  "description": "Bar Project backend",
+  "main": "index.js",
+  "scripts": {
+    "build": "bash ./scripts/start.sh",
+    "lint": "node ./node_modules/.bin/tslint -c tslint.json --project tsconfig.json src/**/*.ts",
+    "start": "npm run build && node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aleksey-P/BarProject_Backend.git"
+  },
+  "author": "Aleksey Petrunin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aleksey-P/BarProject_Backend/issues"
+  },
+  "homepage": "https://github.com/Aleksey-P/BarProject_Backend#readme",
+  "devDependencies": {
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.0",
+    "@types/helmet": "0.0.41",
+    "@types/node": "^10.10.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "log4js": "^3.0.5"
+  }
+}
