@@ -8,7 +8,7 @@
         "max-line-length": {
             "options": [140]
         },
-        "no-any": true,
+        "no-any": false,
         "no-console": true,
         "no-var-requires": true,
         "quotemark": [
@@ -21,6 +21,8 @@
         "no-shadowed-variable": true,
         "no-eval": true,
         "no-empty": true,
+        "ordered-imports": false,
+        "object-literal-sort-keys": false,
         "interface-name" : [true, "never-prefix"]
     },
     "rulesDirectory": []

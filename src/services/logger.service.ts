@@ -9,15 +9,19 @@ export class LoggerService {
     }
 
     public logInfo(logText: string): void {
-        this.logger.info(logText);
+        this.logger.info(this.formatMessage(logText));
     }
 
     public logWarn(logText: string): void {
-        this.logger.warn(logText);
+        this.logger.warn(this.formatMessage(logText));
     }
 
     public logError(logText: string): void {
-        this.logger.error(logText);
+        this.logger.error(this.formatMessage(logText));
+    }
+
+    private formatMessage(text: string): string {
+        return text;
     }
 
     private configureLogger(context: string): void {

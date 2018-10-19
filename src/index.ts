@@ -6,18 +6,24 @@ import { createServer, Server } from 'http';
 import { LoggerService } from './services/logger.service';
 import { Application } from 'express';
 import { APP_CONFIG } from './config/app.config';
+import apiController from './controllers/api.controller';
+import appMySql, { MySqlDatabase } from './database/mysql.database';
+import { MysqlError } from 'mysql';
 
-class App {
+export class App {
     private static loggerContext = 'APP';
     private static logger = new LoggerService(App.loggerContext);
     private static express: Application = express();
-    private static expressServer: Server
+    private static expressServer: Server;
+    private static appMySql: MySqlDatabase = appMySql;
 
     public static startApplication(): void {
         App.express.use(bodyParser.json());
         App.express.use(bodyParser.urlencoded({ extended: false }));
         App.express.use(helmet());
         App.express.use(cors());
+
+        App.initRoutes();
 
         App.logger.logInfo('Starting HTTP server...');
         App.expressServer = createServer(App.express);
@@ -35,6 +41,19 @@ class App {
         process.on('unhandledRejection', (error) => {
             App.logger.logError(error.message);
         });
+
+        App.appMySql.pool.on('connection', (err: MysqlError) => {
+            if (err) {
+                App.logger.logError('MySQL Connection Error!');
+                return;
+            }
+
+            App.logger.logInfo('MySQL Successfully Connected!')
+        });
+    }
+
+    private static initRoutes(): void {
+        this.express.use('/api', (apiController as any).router)
     }
 
     private static closeServer(): void {
